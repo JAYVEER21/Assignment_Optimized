@@ -9,22 +9,22 @@ import org.testng.annotations.Test;
         private final String accessToken = "KqcL7s998JrfFHRP";
         private final APIutil requestUtil = new APIutil(accessToken);
 
-        @Test
-        void addCartItem() {
+        @Test(dataProvider = "BookCartLogin",dataProviderClass = DataProvider_BOOK.class)
+        void addCartItem(String userId,String bookId) {
             JSONObject requestBody = new JSONObject();
-            requestBody.put("productId", "1");
-            requestBody.put("quantity", "85");
+            requestBody.put("userId", userId);
+            requestBody.put("bookId", bookId);
 
-            requestUtil.sendRequest("POST", baseURI + "/ShoppingCart/AddToCart/1/85", requestBody, 200);
+            requestUtil.sendRequest("POST", baseURI + "/ShoppingCart/AddToCart/"+userId+"/"+bookId+"/", requestBody, 200);
         }
 
-        @Test
-        void getCartItem() {
-            requestUtil.sendRequest("GET", baseURI + "/ShoppingCart/1", null, 200);
+        @Test(dataProvider = "BookCartLogin",dataProviderClass = DataProvider_BOOK.class)
+        void getCartItem(String userId,String bookId) {
+            requestUtil.sendRequest("GET", baseURI + "/ShoppingCart/"+userId, null, 200);
         }
 
-        @Test
-        void deleteCartItem() {
+        @Test(dataProvider = "BookCartLogin",dataProviderClass = DataProvider_BOOK.class)
+        void deleteCartItem(String userId,String bookId) {
             requestUtil.sendRequest("DELETE", baseURI + "/ShoppingCart/1", null, 200);
         }
     }
