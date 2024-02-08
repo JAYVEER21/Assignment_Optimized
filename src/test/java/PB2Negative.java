@@ -1,5 +1,9 @@
+import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 import org.testng.annotations.Test;
+import util.APIutil;
+
+import static org.hamcrest.Matchers.equalTo;
 
 public class PB2Negative {
 
@@ -21,7 +25,8 @@ public class PB2Negative {
 
     @Test
     void getUser() {
-        requestUtil.sendRequest("GET", baseURI + "/public/v2/users/", null, 200);
+        Response response=requestUtil.sendRequest("GET", baseURI + "/public/v2/users/", null, 200);
+        response.then().body("[0].id",equalTo(6203794));
     }
 
     @Test

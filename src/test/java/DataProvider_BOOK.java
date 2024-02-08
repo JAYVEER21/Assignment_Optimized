@@ -16,7 +16,7 @@ public class DataProvider_BOOK {
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet sheet = workbook.getSheet(sheetName);
         int noOfRows = sheet.getPhysicalNumberOfRows();
-        int noOfColumns = sheet.getRow(0).getLastCellNum();
+        int noOfColumns = sheet.getRow(0).getLastCellNum()-1;
         String[][] data = new String[noOfRows-1][noOfColumns];
         for(int i=0;i<noOfRows-1;i++)
         {
