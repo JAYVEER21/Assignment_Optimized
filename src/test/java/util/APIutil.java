@@ -1,3 +1,6 @@
+package util;
+
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
@@ -17,13 +20,13 @@ public class APIutil {
 
         switch (method.toUpperCase()) {
             case "GET":
-                response = given()
+                response = RestAssured.given()
                         .header("Authorization", "Bearer " + accessToken)
                         .when()
                         .get(endpoint);
                 break;
             case "POST":
-                response = given()
+                response = RestAssured.given()
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(ContentType.JSON)
                         .body(requestBody.toJSONString())
@@ -31,7 +34,7 @@ public class APIutil {
                         .post(endpoint);
                 break;
             case "PUT":
-                response = given()
+                response = RestAssured.given()
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(ContentType.JSON)
                         .body(requestBody.toJSONString())
@@ -39,7 +42,7 @@ public class APIutil {
                         .put(endpoint);
                 break;
             case "DELETE":
-                response = given()
+                response = RestAssured.given()
                         .header("Authorization", "Bearer " + accessToken)
                         .when()
                         .delete(endpoint);
